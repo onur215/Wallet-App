@@ -54,14 +54,20 @@ const harcamayiShowScreen = ({ id, miktar, tarih, aciklama }) => {
 <tr>
 <td class="bg-warning">${tarih} </td>
 <td class="bg-warning">${aciklama}</td>
-<td class="bg-warning>"${miktar}</td>
+<td class="bg-warning">${miktar}</td>
 <td class="bg-warning"> <i class="fa-solid fa-trash-can text-danger"  type="button"></i></td>
-
-<td></td>
 </tr>
 
 
 `;
 
 //silme
+
+document.querySelectorAll(".fa-trash-can").forEach((sil)=>{
+    sil.onclick=()=>{
+        sil.parentElement.parentElement.remove()
+    }
+})
+
+
 };
