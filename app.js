@@ -18,4 +18,30 @@ const kalanTable = document.getElementById("kalan")
 let gelirler = 0
 let harcamaListesi = []
 
-// harcama formu
+//* Harcama Formu
+
+const harcamaFormu = document.getElementById("harcama-formu");
+const tarihInput = document.getElementById("tarih");
+const miktarInput = document.getElementById("miktar");
+const harcamaAlaniInput = document.getElementById("harcama-alani");
+
+//* harcama tablosu
+const harcamaBody = document.getElementById("harcama-body");
+const temizleBtn = document.getElementById("temizle-btn");
+
+// İlk formu doldurma
+
+harcamaFormu.addEventListener("submit",(e) => {
+    e.preventDefault() //reload u engellemek için
+
+    const yeniHarcama = {
+        tarih: tarihInput.value,
+        miktar: miktarInput.value,
+        aciklama: harcamaAlaniInput.value,
+        id: new Date().getTime()
+    };
+
+    harcamaListesi.push(yeniHarcama)
+
+    
+})
