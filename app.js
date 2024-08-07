@@ -1,22 +1,20 @@
-//Selectors 
+//?Selectors
 
-//Ekle formu
+//* ekle formu
 
-const ekleBtn = document.querySelector("#ekle-btn")
-const gelirInput = document.querySelector("#gelir-input")
-const ekleFormu = document.querySelector("#ekle-formu")
+const ekleBtn = document.querySelector("#ekle-btn");
+const gelirInput = document.querySelector("#gelir-input");
+const ekleFormu = document.querySelector("#ekle-formu");
 
-//Sonuç tablosu
+//*sonuç tablosu
 
-const gelirinzTable = document.getElementById("geliriniz")
-const giderinizTable = document.getElementById("gideriniz")
-const kalanTable = document.getElementById("kalan")
+const gelirinizTable = document.getElementById("geliriniz");
+const giderinizTable = document.getElementById("gideriniz");
+const kalanTable = document.getElementById("kalan");
 
-
-// Variables
-
-let gelirler = 0
-let harcamaListesi = []
+//?variables
+let gelirler = 0;
+let harcamaListesi = [];
 
 //* Harcama Formu
 
@@ -29,19 +27,41 @@ const harcamaAlaniInput = document.getElementById("harcama-alani");
 const harcamaBody = document.getElementById("harcama-body");
 const temizleBtn = document.getElementById("temizle-btn");
 
-// İlk formu doldurma
+//! ilk formu doldurma
 
-harcamaFormu.addEventListener("submit",(e) => {
-    e.preventDefault() //reload u engellemek için
+harcamaFormu.addEventListener("submit", (e) => {
+  e.preventDefault(); //reload u engellemek için
 
-    const yeniHarcama = {
-        tarih: tarihInput.value,
-        miktar: miktarInput.value,
-        aciklama: harcamaAlaniInput.value,
-        id: new Date().getTime()
-    };
+  const yeniHarcama = {
+    tarih: tarihInput.value,
+    miktar: miktarInput.value,
+    aciklama: harcamaAlaniInput.value,
+    id: new Date().getTime(),
+  };
 
-    harcamaListesi.push(yeniHarcama)
+  harcamaListesi.push(yeniHarcama);
 
-    
-})
+  //ekrana bastır
+  harcamayiShowScreen(yeniHarcama);
+});
+
+//! harcamaları dom daki table a bastır
+
+const harcamayiShowScreen = ({ id, miktar, tarih, aciklama }) => {
+  // const{id,miktar,tarih,aciklama}=harcamaListesi
+
+  harcamaBody.innerHTML += `
+<tr>
+<td class="bg-warning">${tarih} </td>
+<td class="bg-warning">${aciklama}</td>
+<td class="bg-warning>"${miktar}</td>
+<td class="bg-warning"> <i class="fa-solid fa-trash-can text-danger"  type="button"></i></td>
+
+<td></td>
+</tr>
+
+
+`;
+
+//silme
+};
