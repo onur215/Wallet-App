@@ -99,7 +99,23 @@ const hesaplaAndGuncelle=() => {
 
     const giderler = harcamaListesi.reduce((toplam,harcama)=>toplam+Number(harcama.miktar),0)
 
-    giderinizTable.textContent= giderler
+    gelirInput.value = ""
+
+     giderinizTable.textContent= giderler
 
     kalanTable.textContent = gelirler - giderler
+}
+
+//Bilgileri temizle
+
+temizleBtn.onclick=()=>{
+
+    if(confirm("tüm verileri silmek istediğine emin misin?")){
+        harcamaListesi = []
+        gelirler = 0
+
+        hesaplaAndGuncelle()
+
+        harcamaBody.innerHTML = ""
+    }
 }
