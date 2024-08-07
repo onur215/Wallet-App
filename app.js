@@ -14,7 +14,7 @@ const kalanTable = document.getElementById("kalan");
 
 //?variables
 let gelirler = Number(localStorage.getItem("gelirler")) || 0;
-let harcamaListesi = JSON.parse(localStorage.getItem("harcamalar")) || [];
+let harcamaListesi = JSON.parse(localStorage.getItem("harcamalar")) || []
 
 
 
@@ -43,17 +43,18 @@ harcamaFormu.addEventListener("submit", (e) => {
 
   harcamaListesi.push(yeniHarcama);
 
-  //localStorage ye diziyi yollayalım
 
-  localStorage.setItem("harcamalar", JSON.stringify(harcamaListesi))
+  //?localStorage ye diziyi yollayalım
+
+  localStorage.setItem("harcamalar", JSON.stringify(harcamaListesi) )
 
   //ekrana bastır
   harcamayiShowScreen(yeniHarcama);
 
-  harcamaFormu.reset()
-//   tarihInput ="" farklı bir yöntemi
+  harcamaFormu.reset();
+  // tarihInput=""
 
-  hesaplaAndGuncelle()
+  hesaplaAndGuncelle();
 });
 
 //! harcamaları dom daki table a bastır
@@ -65,74 +66,75 @@ const harcamayiShowScreen = ({ id, miktar, tarih, aciklama }) => {
 <tr>
 <td class="bg-warning">${tarih} </td>
 <td class="bg-warning">${aciklama}</td>
-<td class="bg-warning">${miktar}</td>
-<td class="bg-warning"> <i class="fa-solid fa-trash-can text-danger"  type="button"></i></td>
+<td class="bg-warning">${miktar} </td>
+<td class="bg-warning"> <i  class="fa-solid fa-trash-can text-danger"  type="button"></i>  </td>
 </tr>
 
 
 `;
 
-//silme
+  //*silme
 
-document.querySelectorAll(".fa-trash-can").forEach((sil)=>{
-    sil.onclick=()=>{
-        sil.parentElement.parentElement.remove()
-    }
-})
-
-
+  document.querySelectorAll(".fa-trash-can").forEach((sil) => {
+    sil.onclick = () => {
+      sil.parentElement.parentElement.remove();
+    };
+  });
 };
 
-//Ekle Formu
+//! ekle formu
 
-ekleFormu.addEventListener("submit",(e)=>{
+ekleFormu.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-e.preventDefault()
+  gelirler = gelirler + Number(gelirInput.value);
 
-gelirler = gelirler + Number(gelirInput.value)
+  gelirInput.value=""
+  // gelirinizTable.textContent=gelirler
 
-// gelirinizTable.textContent=gelirler
+localStorage.setItem("gelirler", gelirler)
 
-localStorage.setItem("gelirler",gelirler)
+  hesaplaAndGuncelle();
+});
 
-hesaplaAndGuncelle()
+//! hesapla ve güncelle
 
-})
+const hesaplaAndGuncelle = () => {
+  gelirinizTable.textContent = gelirler;
 
-//Hesapla ve güncelle
+  const giderler = harcamaListesi.reduce(
+    (toplam, harcama) => toplam + Number(harcama.miktar),
+    0
+  );
 
-const hesaplaAndGuncelle=() => {
-    gelirinizTable.textContent = gelirler;
+  giderinizTable.textContent = giderler;
+
+  kalanTable.textContent = gelirler - giderler;
+};
 
 
-    const giderler = harcamaListesi.reduce((toplam,harcama)=>toplam+Number(harcama.miktar),0)
-
-    gelirInput.value = ""
-
-     giderinizTable.textContent= giderler
-
-    kalanTable.textContent = gelirler - giderler
-}
-
-//Bilgileri temizle
+//!bilgileri temizle
 
 temizleBtn.onclick=()=>{
 
     if(confirm("tüm verileri silmek istediğine emin misin?")){
-        harcamaListesi = []
-        gelirler = 0
+harcamaListesi=[]
 
-        hesaplaAndGuncelle()
+gelirler=0
 
-        harcamaBody.innerHTML = ""
+hesaplaAndGuncelle()
+
+ harcamaBody.innerHTML=""
+
+
     }
 }
 
 
-//refresh durumunda localStorage den veriler ekrana basılsın
+//!refresh durrumunda localStroge den veriler ekrana basılsın
 harcamaListesi.forEach((a)=>{
-    harcamayiShowScreen(a)
+harcamayiShowScreen(a)
+
 })
-
-
-hesaplaAndGuncelle()
+//  harcamayiShowScreen(harcamaListesi);
+hesaplaAndGuncelle();
