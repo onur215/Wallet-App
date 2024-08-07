@@ -13,8 +13,10 @@ const giderinizTable = document.getElementById("gideriniz");
 const kalanTable = document.getElementById("kalan");
 
 //?variables
-let gelirler = 0;
-let harcamaListesi = [];
+let gelirler = Number(localStorage.getItem("gelirler")) || 0;
+let harcamaListesi = JSON.parse(localStorage.getItem("harcamalar")) || [];
+
+
 
 //* Harcama Formu
 
@@ -40,6 +42,10 @@ harcamaFormu.addEventListener("submit", (e) => {
   };
 
   harcamaListesi.push(yeniHarcama);
+
+  //localStorage ye diziyi yollayalım
+
+  localStorage.setItem("harcamalar", JSON.stringify(harcamaListesi))
 
   //ekrana bastır
   harcamayiShowScreen(yeniHarcama);
@@ -85,7 +91,9 @@ e.preventDefault()
 
 gelirler = gelirler + Number(gelirInput.value)
 
-gelirinizTable.textContent=gelirler
+// gelirinizTable.textContent=gelirler
+
+localStorage.setItem("gelirler",gelirler)
 
 hesaplaAndGuncelle()
 
