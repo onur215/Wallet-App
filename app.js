@@ -11,3 +11,11 @@ const ekleFormu = document.querySelector("#ekle-formu")
 const gelirinzTable = document.getElementById("geliriniz")
 const giderinizTable = document.getElementById("gideriniz")
 const kalanTable = document.getElementById("kalan")
+
+
+// Variables
+
+let gelirler = 0
+let harcamaListesi = []
+
+// harcama formu
