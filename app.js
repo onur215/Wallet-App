@@ -71,3 +71,15 @@ document.querySelectorAll(".fa-trash-can").forEach((sil)=>{
 
 
 };
+
+//Ekle Formu
+
+ekleFormu.addEventListener("submit",(e)=>{
+
+e.preventDefault()
+
+gelirler = gelirler + Number(gelirInput.value)
+
+gelirinizTable.textContent=gelirler
+
+})
