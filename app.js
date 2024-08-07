@@ -127,3 +127,12 @@ temizleBtn.onclick=()=>{
         harcamaBody.innerHTML = ""
     }
 }
+
+
+//refresh durumunda localStorage den veriler ekrana basılsın
+harcamaListesi.forEach((a)=>{
+    harcamayiShowScreen(a)
+})
+
+
+hesaplaAndGuncelle()
