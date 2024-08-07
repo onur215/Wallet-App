@@ -83,3 +83,12 @@ gelirler = gelirler + Number(gelirInput.value)
 gelirinizTable.textContent=gelirler
 
 })
+
+//Hesapla ve güncelle
+
+const hesaplaAndGuncelle=() => {
+    gelirinizTable.textContent = gelirler;
+
+
+    const giderler = harcamaListesi.reduce((toplam,harcama)=>toplam+harcama.miktar,0)
+}
