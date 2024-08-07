@@ -43,6 +43,11 @@ harcamaFormu.addEventListener("submit", (e) => {
 
   //ekrana bastır
   harcamayiShowScreen(yeniHarcama);
+
+  harcamaFormu.reset()
+//   tarihInput ="" farklı bir yöntemi
+
+  hesaplaAndGuncelle()
 });
 
 //! harcamaları dom daki table a bastır
@@ -82,6 +87,8 @@ gelirler = gelirler + Number(gelirInput.value)
 
 gelirinizTable.textContent=gelirler
 
+hesaplaAndGuncelle()
+
 })
 
 //Hesapla ve güncelle
@@ -90,5 +97,9 @@ const hesaplaAndGuncelle=() => {
     gelirinizTable.textContent = gelirler;
 
 
-    const giderler = harcamaListesi.reduce((toplam,harcama)=>toplam+harcama.miktar,0)
+    const giderler = harcamaListesi.reduce((toplam,harcama)=>toplam+Number(harcama.miktar),0)
+
+    giderinizTable.textContent= giderler
+
+    kalanTable.textContent = gelirler - giderler
 }
